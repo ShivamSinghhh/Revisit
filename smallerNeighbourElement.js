@@ -30,8 +30,7 @@ function runProgram(input) {
     input = input.trim().split("\n");
     let n = +input[0];
     let arr = input[1].trim().split(" ").map(Number);
-   // console.log(n, arr)
-    
+     
     solve(n,arr)
    
   }

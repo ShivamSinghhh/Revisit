@@ -1,38 +1,33 @@
 
-function stringCoordinates(n,str){
-    let x = 0 ;
-    let y = 0 ;
-
-    for (let i = 0 ; i<n ;i++){
-       // console.log(str[i])
-        switch(str[i]){
-
-            case "u":  x=x+1 ; break
-            case "d" : x= x-1 ; break;
-            case "l" : y= y-1 ; break ;
-            case "r" : y = y+1 ; break;
-            default : break;
-           
-        }
-      // console.log(x,y)
-    }
-
-    console.log(`${x} ${y}`)
-
+function binaryEquivalent(num,ans){
+    if (num === 0 ) {return}
+    else {
+        let x = Math.floor(num/2);
+        binaryEquivalent(x,ans)
+        ans.push(num%2);      
+    }   
 }
+
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
-    let n = +input[0];
-    let str = input[1].trim();
-   // console.log(n,str);
-    stringCoordinates(n,str)
+    let test = +input[0];
+    let line = 1 ;
+    for (let i = 0 ; i< test ; i++){
+        let n = +input[line++];
+       // console.log(n) 
+        let output = []       
+        binaryEquivalent(n,output)   
+        console.log(output.join(""))      
+    }
+
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`5
-  ulrdr`);
+  runProgram(`2
+  15
+  128`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

@@ -1,38 +1,23 @@
-
-function stringCoordinates(n,str){
-    let x = 0 ;
-    let y = 0 ;
-
-    for (let i = 0 ; i<n ;i++){
-       // console.log(str[i])
-        switch(str[i]){
-
-            case "u":  x=x+1 ; break
-            case "d" : x= x-1 ; break;
-            case "l" : y= y-1 ; break ;
-            case "r" : y = y+1 ; break;
-            default : break;
-           
-        }
-      // console.log(x,y)
+function alternateSum(n,arr){
+    let sum = 0 ;
+    for (let i = 0 ;i <n ; i = i+2){
+        sum += arr[i]
     }
-
-    console.log(`${x} ${y}`)
-
+    console.log(sum)
 }
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
     let n = +input[0];
-    let str = input[1].trim();
-   // console.log(n,str);
-    stringCoordinates(n,str)
+    let arr = input[1].trim().split(" ").map(Number);
+    alternateSum(n,arr)
+
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`5
-  ulrdr`);
+  runProgram(`7
+  4 5 5 5 6 6 7`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

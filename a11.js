@@ -1,24 +1,42 @@
 
-function oddOneOut(a,b,c){
-
-    if (b === c && b !== a) { console.log(a)}
-    else if (a === c && b !== c) { console.log(b)}
-    else if (a === b && b !== c) { console.log(c)}
-    else {console.log(0)}
+function minimumInSortedAndRotated(n,arr){
+    let lo = 0 ;
+    let hi = n-1 ;
+    let min = 1/0;
+    while (lo <= hi){        
+    let mid = Math.floor(lo + (hi - lo) / 2);
+    
+    if (arr[mid] < arr[lo] && arr[mid] <= arr[hi])
+       { 
+           min = arr[mid];
+           hi = mid-1;       
+       }
+     else if (arr[mid] >= arr[lo] && arr[mid] <= arr[hi])
+       { 
+           min = arr[mid];
+           hi = mid-1;       
+       }
+    else {
+        lo = mid+1;
+    }
 }
-
-
+  console.log(min) 
+}
 
 function runProgram(input) {
     // write code here
-    let [a,b,c] = input.trim().split(" ").map(Number);
-    
-    oddOneOut(a,b,c)
+    input = input.trim().split("\n");
+    let n = +input[0];
+    let arr = input[1].trim().split(" ").map(Number);
+   // console.log(n,arr)
+   minimumInSortedAndRotated(n,arr);
+ 
 
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`2 5 2`);
+  runProgram(`8
+  0 8 9 -9 -7 -3 -2 -1`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

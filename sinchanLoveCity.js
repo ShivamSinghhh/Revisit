@@ -1,39 +1,33 @@
 
-function repeatedAndMissing(n,arr){
-    let missing ;
-    let repeated ;
-    for(let i = 0 ; i < n; i++){
-        if (arr[i] !== i+1) { missing = i+1}
-        if (arr[i] === arr[i+1]) { repeated = arr[i]}
+function sinchanLoveCity(cities,quality,value){
+    let amount = 0 ;
+    for (let i = 0 ; i < value.length-1; i++){
+        amount += value[i+1]-value[i];        
     }
-    console.log(`${missing} ${repeated}`)
+    console.log(quality*amount)
 
 }
 
-
 function runProgram(input) {
-    // write code here
+    // write code here   
     input = input.trim().split("\n");
     let test = +input[0];
-    let line = 1 ;
-    for (let i =0 ; i < test; i++){
-        let n = +input[line++];
-        let arr = input[line++].trim().split(" ").map(Number);
-       // console.log(n,arr);
-        arr = arr.sort((a,b)=>a-b)
-        repeatedAndMissing(n,arr)
+    let line =  1; 
+    for (let i = 0 ; i< test; i++){
+        let [cities,quality] = input[line++].trim().split(" ").map(Number);
+        let value = input[line++].trim().split(" ").map(Number);
+        value = value.sort((a,b)=>a-b) ;
+        sinchanLoveCity(cities,quality,value);
     }
 
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`3
-  5
-  1 2 3 3 4
-  2
-  1 1
-  3
-  1 2 2`);
+  runProgram(`2
+  2 4
+  2 1
+  1 5
+  3`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

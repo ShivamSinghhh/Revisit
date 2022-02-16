@@ -1,38 +1,37 @@
 
-function stringCoordinates(n,str){
-    let x = 0 ;
-    let y = 0 ;
-
-    for (let i = 0 ; i<n ;i++){
-       // console.log(str[i])
-        switch(str[i]){
-
-            case "u":  x=x+1 ; break
-            case "d" : x= x-1 ; break;
-            case "l" : y= y-1 ; break ;
-            case "r" : y = y+1 ; break;
-            default : break;
-           
-        }
-      // console.log(x,y)
+function minMax(n,arr,m){
+    let min = 0 ;
+    let max = 0 ;
+    for (let i = 0 ; i < n ; i++ ){
+        if ( i < m)
+           { min += arr[i]} ;
+        if ( i >= n-m )
+           { max += arr[i]}
     }
 
-    console.log(`${x} ${y}`)
+    console.log(max-min)
 
 }
+
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
-    let n = +input[0];
-    let str = input[1].trim();
-   // console.log(n,str);
-    stringCoordinates(n,str)
+    let test = +input[0];
+    let line = 1 ;
+    for (let i = 0 ; i < test ;i++){
+        let [n,m] = input[line++].trim().split(" ").map(Number);
+        let arr = input[line++].trim().split(" ").map(Number);
+        arr = arr.sort((a,b)=>a-b)
+        minMax(n,arr,m)
+    }
+
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`5
-  ulrdr`);
+  runProgram(`1
+  5 1
+  1 2 3 4 5`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

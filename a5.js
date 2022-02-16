@@ -1,62 +1,46 @@
 
-function findRoot(n, num) {
-  
-    let lo = 1;
-    let hi = num;
-    let ans;
-
-    while (lo < hi && hi-lo >= 1) {
-        let mid = lo + (hi - lo) / 2;
-        if (mid ** n === num)
-        {
-            ans = mid;
-            break;
-        }
-        else if (mid ** n > num) { hi = mid; }
-        else {
-            ans = mid;
-            lo = mid ;
-        }
+function uniqueOddSubset(n,arr,k,curr,ans){
+    if (ans.length >= k ) 
+    { console.log(ans)}
+    
+    for (let i = curr ; i<arr.length ;i++){
+        ans.push(arr[i]);
+        uniqueOddSubset(n,arr,k,i+1,ans);
+        ans.pop()
     }
-    
-    console.log(Math.round(ans))
-    
 }
 
 
 function runProgram(input) {
-    // Write code here
+    // write code here
     input = input.trim().split("\n");
-    let test = +input[0];
-    let line = 1; 
+    let n = +input[0];
+    let arr = input[1].trim().split(" ").map(Number);
+    let k = +input[2];
+   // console.log(n,arr,k)
+    uniqueOddSubset(n,arr,k,0,[])
 
-    for (let i = 0; i < test; i++){
+}
 
-        let [n, num] = input[line++].trim().split(" ").map(Number);
-        findRoot(n, num);
-    }
-   
-  }
-  if (process.env.USERNAME === "Cvam's Singhh") {
-      runProgram(`3
-2 9
-6 4096
-3 126`);
-  } else {
-    process.stdin.resume();
-    process.stdin.setEncoding("ascii");
-    let read = "";
-    process.stdin.on("data", function (input) {
-      read += input;
-    });
-    process.stdin.on("end", function () {
-      read = read.replace(/\n$/, "");
-      read = read.replace(/\n$/, "");
-      runProgram(read);
-    });
-    process.on("SIGINT", function () {
-      read = read.replace(/\n$/, "");
-      runProgram(read);
-      process.exit(0) ;
-    });
-  }
+if (process.env.USERNAME === "Cvam's Singhh") {
+  runProgram(`3 
+  1 2 3
+  2`);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

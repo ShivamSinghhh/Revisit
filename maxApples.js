@@ -1,38 +1,30 @@
-
-function stringCoordinates(n,str){
-    let x = 0 ;
-    let y = 0 ;
-
-    for (let i = 0 ; i<n ;i++){
-       // console.log(str[i])
-        switch(str[i]){
-
-            case "u":  x=x+1 ; break
-            case "d" : x= x-1 ; break;
-            case "l" : y= y-1 ; break ;
-            case "r" : y = y+1 ; break;
-            default : break;
-           
-        }
-      // console.log(x,y)
+function maxApples(n,arr,w){
+    let count = 0 ;
+     
+    for(let i = 0 ; i< n; i++){
+        w = w - arr[i];
+        if(w >= 0) { count++} 
+        else { return count}       
     }
-
-    console.log(`${x} ${y}`)
-
+    return count;
+       
 }
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
-    let n = +input[0];
-    let str = input[1].trim();
-   // console.log(n,str);
-    stringCoordinates(n,str)
+    let [n,w] = input[0].trim().split(" ").map(Number);
+    let arr = input[1].trim().split(" ").map(Number);
+    arr = arr.sort((a,b)=>a-b);
+
+    console.log(maxApples(n,arr,w));
+
+
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`5
-  ulrdr`);
+  runProgram(`4 20
+  3 10 4 4 `);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

@@ -1,64 +1,48 @@
 
-function recordBreaker(n, arr) {
-    let min = arr[0];
-    let max = arr[0];
-    let minCount = 0;
-    let maxCount = 0;
+function canBeSorted(arr,reverse){
+   
+    if (isSorted(arr)  || isSorted(reverse))
+    { console.log("YES")}
+    else { console.log("NO")}
+}
 
-    for (let i = 1; i < n; i++){
-        if (arr[i] < min)
-        {
-            min = arr[i];
-            minCount++;
-        }
-        else if (arr[i] > max)
-        {
-            max = arr[i];
-            maxCount++;
-        }
-
+function isSorted(arr){
+    for (let i = 0 ; i< arr.length;i++){
+        if (arr[i] > arr[i+1])
+        { return false}
     }
-
-    console.log(maxCount,minCount)
-
-    
+    return true;
 }
 
 
-
 function runProgram(input) {
-    // Write code here
+    // write code here
     input = input.trim().split("\n");
-    let test = +input[0];
-    let line = 1;
-    for (let i = 0; i < test; i++){
-        let n = +input[line++];
-        let arr = input[line++].trim().split(" ").map(Number);
-        recordBreaker(n,arr)
-    }
-   
-  }
-  if (process.env.USERNAME === "Cvam's Singhh") {
-      runProgram(`2
-9
-10 5 20 20 4 5 2 25 1
-10
-3 4 21 36 10 28 35 5 24 42`);
-  } else {
-    process.stdin.resume();
-    process.stdin.setEncoding("ascii");
-    let read = "";
-    process.stdin.on("data", function (input) {
-      read += input;
-    });
-    process.stdin.on("end", function () {
-      read = read.replace(/\n$/, "");
-      read = read.replace(/\n$/, "");
-      runProgram(read);
-    });
-    process.on("SIGINT", function () {
-      read = read.replace(/\n$/, "");
-      runProgram(read);
-      process.exit(0) ;
-    });
-  }
+    let n = +input[0];
+    let arr = input[1].trim().split(" ").map(Number);
+    let reverse = arr.sort((a,b)=>a-b) ;
+    canBeSorted(arr,reverse)
+
+}
+
+if (process.env.USERNAME === "Cvam's Singhh") {
+  runProgram(`10
+  -1 0 1 2 3 10 9 7 6 4`);
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding("ascii");
+  let read = "";
+  process.stdin.on("data", function (input) {
+    read += input;
+  });
+  process.stdin.on("end", function () {
+    read = read.replace(/\n$/, "");
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+  });
+  process.on("SIGINT", function () {
+    read = read.replace(/\n$/, "");
+    runProgram(read);
+    process.exit(0);
+  });
+}

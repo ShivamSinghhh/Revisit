@@ -1,38 +1,25 @@
-
-function stringCoordinates(n,str){
-    let x = 0 ;
-    let y = 0 ;
-
-    for (let i = 0 ; i<n ;i++){
-       // console.log(str[i])
-        switch(str[i]){
-
-            case "u":  x=x+1 ; break
-            case "d" : x= x-1 ; break;
-            case "l" : y= y-1 ; break ;
-            case "r" : y = y+1 ; break;
-            default : break;
-           
-        }
-      // console.log(x,y)
-    }
-
-    console.log(`${x} ${y}`)
-
+let sum = 0 ;
+function gpAndRecursion(n,ratio){
+    if (n < 0) { return}
+    else {
+        sum += 1/ratio**n;
+        gpAndRecursion(n-1,ratio)
+    }   
 }
+
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
-    let n = +input[0];
-    let str = input[1].trim();
-   // console.log(n,str);
-    stringCoordinates(n,str)
+    let [n,ratio] = input[0].trim().split(" ").map(Number);
+    // console.log(num,n)
+    gpAndRecursion(n,ratio);
+    console.log(sum.toFixed(4))
+
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`5
-  ulrdr`);
+  runProgram(`3 5`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

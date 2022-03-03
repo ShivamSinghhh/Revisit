@@ -1,29 +1,54 @@
+function oppositeOfQuickSort(arr,lo,hi){
+    if (lo < hi) {
 
-
- function numberOfWays(n,dp){
-    if (n < 0) { return  0}
-    if (dp[n] !== undefined)
-       { return dp[n]}
-    else {
-        dp[n] = numberOfWays(n-1,dp) + numberOfWays(n-2,dp)+ numberOfWays(n-3,dp)
-    }    
-    return dp[n]
+        let index = getPivotIndex(arr, lo, hi);
+        oppositeOfQuickSort(arr, lo, index - 1);
+        oppositeOfQuickSort(arr, index + 1, hi)
+    }
+    else {return}
+  
 }
+
+
+//------------Set Pivot to appropriate position in array-------//
+
+function getPivotIndex(arr,lo,hi){
+    
+    let pivot = arr[lo];
+    let i = lo;
+    let j = hi;
+
+    while (i < j) {
+        while (arr[i] >= pivot ) { i++ }
+        while (arr[j] <= pivot) { j-- }
+
+        if (i < j) {
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+            i++;
+            j--;
+        }
+        
+    }
+
+    [arr[lo], arr[j]] = [arr[j], arr[lo]];   
+
+    return j; // element at this position got its exact position.
+}
+
 
 function runProgram(input) {
     // write code here
-    let n = +input;
-    let dp = new Array(n+1);
-    dp[0] = 0 ;
-    dp[1] = 1;
-    dp[2] = 2;
-    dp[3] = 4 ;     
-    numberOfWays(n,dp)  
-    console.log(dp[n]);  
+    input = input.trim().split("\n");
+    let n = +input[0];
+    let arr = input[1].trim().split(" ").map(Number);
+    console.log(n,arr);
+    oppositeOfQuickSort(arr,0,n-1);
+    console.log(arr.join(" "))
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`4`);
+  runProgram(`5
+  2 3 1 4 5`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

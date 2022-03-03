@@ -43,20 +43,3 @@ function partition(arr, lo, hi) {
 
 quickSort(arr,lo,hi)
 console.log("arr =",arr)
-
-// function findIndex(arr) {
-//     let lo = 0;
-//     let hi = arr.length - 1;
-//     let index = -1;
-
-//     while (lo <= hi) {
-//         let mid = Math.floor(lo + (hi - lo) / 2);
-
-//         if (arr[mid] >= 0) { hi = mid - 1 }
-//         else {
-//             lo = mid + 1;
-//             index = mid;
-//         }
-//     }
-//     console.log(index+1);
-// }

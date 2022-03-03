@@ -1,31 +1,25 @@
-function greatestCommonDevisor(a,b){
-    if (a % b === 0) { return b}
+let sum = 0 ;
+function gpAndRecursion(n,ratio){
+    if (n < 0) { return}
     else {
-        let x = a % b;       
-       return greatestCommonDevisor(b,x);
-    }
-
+        sum += 1/ratio**n;
+        gpAndRecursion(n-1,ratio)
+    }   
 }
 
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
-    let test = +input[0];
-    let line  = 1 ;
-    for (let i = 0 ; i < test;i++){
-        let [a,b] = input[line++].trim().split(" ").map(Number);
-       // console.log(a,b);
-       let x = greatestCommonDevisor(a,b)
-       console.log(x)
-    }
+    let [n,ratio] = input[0].trim().split(" ").map(Number);
+    // console.log(num,n)
+    gpAndRecursion(n,ratio);
+    console.log(sum.toFixed(4))
 
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`2
-  6 11
-  15 135`);
+  runProgram(`3 5`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

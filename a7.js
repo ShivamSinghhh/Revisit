@@ -1,38 +1,73 @@
+let text = "abracadabra";
+let prefix = "habrahabr";
+let suffix = "bracket";
+// final = abrac
 
-function numberOfWays(n,pow){
-    let count = 0 ;
-    let sum = 
-    for (let i = 1 ; i< n; i++){
+let totalSubstrings = [];
+let maxPre = 0;
+let maxSuff = 0;
 
+ genrateSubstrings(text,0,[]);
+
+ let finalOutput = prefixSuffix(prefix,suffix,maxPre,maxSuff);
+console.log(finalOutput);
+
+ console.log(maxPre);
+ console.log(maxSuff)
+
+ //-----------generate all substrings-------------------//
+function genrateSubstrings(text,curr,ans){ 
+    if (ans.length > 0 ) 
+    { 
+        let countPre = preFixCheck(ans,prefix);
+        let countSuff = suffixCheck(ans,suffix);
+        if(countPre > maxPre) { maxPre = countPre}
+        if(countSuff > maxSuff) { maxSuff = countSuff}
+        totalSubstrings.push([...ans]);
+    }
+    if (curr > text.length) { return}
+
+    for (let i = curr ; i < text.length;  i++){
+        ans.push(text[i]);
+        genrateSubstrings(text,i+1,ans);
+        ans.pop()
     }
 }
 
-
-function runProgram(input) {
-    // write code here
-    let [n,pow] = input.trim().split(" ").map(Number);
-    console.log(n,pow)
-    numberOfWays(n,pow)
-
+//---------------------- prefix check----------------------------//
+function preFixCheck(text,prefix){
+    let count = 0 ;
+    for (let i = 0 ; i < text.length && i < prefix.length ; i++){
+           if (text[text.length-1-i] == prefix[prefix.length-1-i] )
+           { count++}
+           else {break}
+    }
+  return count;
 }
 
-if (process.env.USERNAME === "Cvam's Singhh") {
-  runProgram(`10 2`);
-} else {
-  process.stdin.resume();
-  process.stdin.setEncoding("ascii");
-  let read = "";
-  process.stdin.on("data", function (input) {
-    read += input;
-  });
-  process.stdin.on("end", function () {
-    read = read.replace(/\n$/, "");
-    read = read.replace(/\n$/, "");
-    runProgram(read);
-  });
-  process.on("SIGINT", function () {
-    read = read.replace(/\n$/, "");
-    runProgram(read);
-    process.exit(0);
-  });
+//--------------------suffix check------------------------//
+function suffixCheck(text,suffix){
+    let count = 0 ;
+    for (let i = 0 ; i < text.length && i < suffix.length ; i++){
+           if (text[i] == suffix[i] )
+           { count++}
+           else {break}
+    }
+  return count;
 }
+
+ // ------------final output generation-------------------//
+
+ function prefixSuffix(prefix,suffix,maxPre,maxSuff){
+     let str = "";
+     //--------for prefix part addition-----------//
+     for(let i = prefix.length-maxPre ; i < prefix.length ; i++ ){
+         str = str +""+prefix[i]
+     }
+   //--------for suffix part addition------//
+     for(let i = 0 ; i < maxSuff ; i++ ){
+        str = str +""+suffix[i]
+    }
+   return str;
+ }
+//---------------- the end ----------------------------//

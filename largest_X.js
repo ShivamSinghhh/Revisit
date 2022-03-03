@@ -1,31 +1,43 @@
-function greatestCommonDevisor(a,b){
-    if (a % b === 0) { return b}
-    else {
-        let x = a % b;       
-       return greatestCommonDevisor(b,x);
+
+function findLargest(n,arr){
+    let lo = 0 ;
+    let hi = n-1;
+    let ans = -1;
+    while (lo < hi) {
+        if(-arr[lo] === arr[hi])
+        {
+             ans = arr[hi];
+             break;
+        }
+        if(-arr[lo] > arr[hi]) 
+        { lo++}
+       else { hi--;}
     }
-
+    return ans;
 }
-
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
     let test = +input[0];
-    let line  = 1 ;
-    for (let i = 0 ; i < test;i++){
-        let [a,b] = input[line++].trim().split(" ").map(Number);
-       // console.log(a,b);
-       let x = greatestCommonDevisor(a,b)
-       console.log(x)
-    }
+    let line = 1 ;
+    for(let i = 0 ; i< test;i++){
+         let n = +input[line++];
+         let arr = input[line++].trim().split(" ").map(Number);
+         arr.sort((a,b)=>a-b);
+        // console.log(n,arr);
+        let x = findLargest(n,arr)
+        console.log(x)
 
+    }
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
   runProgram(`2
-  6 11
-  15 135`);
+  5
+  2 1 -1 -2 3
+  5
+  -3 2 -4 4 -2`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

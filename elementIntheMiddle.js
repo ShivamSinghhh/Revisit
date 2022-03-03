@@ -1,46 +1,40 @@
 
-function oppQuickSort(arr,lo,hi){
-    if(lo < hi) // checking for atleast 2 elements;
-    {
-        let index = getPivot(arr,lo,hi);
-        oppQuickSort(arr,lo,index-1);
-        oppQuickSort(arr,index+1,hi)
-    }
-    else{return}
-}
+function elementIntheMiddle(n,arr){   
 
-function getPivot(arr,lo,hi){
-   let mid = Math.floor(lo+(hi-lo)/2);
-   let pivot = arr[mid];
-   let i = lo;
-   let j = hi;
-
-   while(i < j){
-        while (arr[i] < pivot)  { i++ };
-        while (arr[j] > pivot)  { j-- };
-        
-        if (i < j){
-            [arr[i],arr[j]] = [arr[j],arr[i]]
+    for(let i = 1; i < n-1; i++){
+       let left_flag = true;
+       let right_flag = true;
+        for(let j = 0 ; j< i; j++){
+            if(arr[j]>= arr[i])
+            { left_flag = false}
         }
-   }
-   return i;
+        
+        for(let j = i+1 ; j< n; j++){
+            if (arr[j] <= arr[i])
+            { right_flag = false}
+        }
+
+        if(left_flag && right_flag)
+         { 
+             console.log(arr[i]);
+             return;
+        }
+    }
+  console.log(-1)
 }
-
-
 
 function runProgram(input) {
     // write code here
     input = input.trim().split("\n");
     let n = +input[0];
     let arr = input[1].trim().split(" ").map(Number);
-    console.log(n,arr)
-    oppQuickSort(arr,0,n-1);
-    console.log("arr",arr)
+   // console.log(n,arr)
+    elementIntheMiddle(n,arr)
 }
 
 if (process.env.USERNAME === "Cvam's Singhh") {
   runProgram(`5
-  3 5 0 9 8`);
+  4 3 6 7 8`);
 } else {
   process.stdin.resume();
   process.stdin.setEncoding("ascii");

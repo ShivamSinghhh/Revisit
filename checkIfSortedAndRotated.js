@@ -31,8 +31,7 @@ function checkIfSortedAndRotated(n,arr){
 }
 
 //-------function for checking Array isSorted or not-------------//
-function checkSorted(arr,lo,hi){
-    let min = arr[lo]
+function checkSorted(arr,lo,hi){  
     for (let i = lo ; i < hi; i++){
         if (arr[i] > arr[i+1])
            {return false}

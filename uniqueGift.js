@@ -14,7 +14,7 @@ function solve(str) {
         else {
             data[str[i]]++
         };
-
+        
         for (key in data) {
             if (data[key] == 1)
             {
